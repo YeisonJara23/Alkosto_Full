@@ -1,0 +1,56 @@
+.main-nav {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e6e6e6;
+  width: 100%;
+  position: relative;
+  z-index: 200;
+}
+
+.main-nav__list {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 0 2rem;
+  height: 50px;
+  list-style: none;
+}
+
+.main-nav__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.main-nav__link {
+  font-size: 14px;
+  font-weight: 500;
+  color: #003b71; /* Azul Alkosto */
+  text-decoration: none;
+  padding: 6px 4px;
+  transition: color 0.2s ease-in-out;
+}
+
+.main-nav__link:hover {
+  color: #ff5c00; /* Naranja Alkosto */
+}
+
+/* MegaMenu aparece debajo del item */
+.main-nav__item:hover .mega {
+  display: block;
+}
+
+/* Animación apareciendo */
+.mega {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-top: 10px;
+  opacity: 0;
+  animation: fadeIn 0.25s forwards ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,47 @@
+.mega {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-top: none;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.12);
+  padding: 20px 30px;
+  min-width: 800px;
+  display: flex;
+  gap: 40px;
+}
+
+.mega__inner {
+  display: flex;
+  gap: 50px;
+}
+
+.mega__col {
+  min-width: 160px;
+}
+
+.mega__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #003b71;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.mega__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mega__link {
+  display: block;
+  font-size: 13px;
+  color: #444;
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+
+.mega__link:hover {
+  color: #ff5c00; /* Naranja Alkosto */
+}
