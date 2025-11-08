@@ -1,4 +1,7 @@
 .home-banner {
+  position: relative;       /* ✅ Necesario para controlar z-index */
+  z-index: 0 !important;    /* ✅ Mantener banner por detrás del mega menu */
+
   background: linear-gradient(180deg, #161615 0%, #ff3300 100%);
   color: white;
   text-align: center;

@@ -1,7 +1,10 @@
 .header {
   width: 100%;
   font-family: Arial, sans-serif;
+  position: relative;       /* ✅ Nuevo */
+  z-index: 2000;            /* ✅ Header delante del banner */
 }
+
 
 /* 🔹 Bloque azul principal (fondo sólido) */
 .header-main {

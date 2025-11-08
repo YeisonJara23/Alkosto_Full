@@ -1,47 +1,91 @@
 .mega {
-  background: #ffffff;
-  border: 1px solid #ddd;
-  border-top: none;
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.12);
-  padding: 20px 30px;
-  min-width: 800px;
-  display: flex;
-  gap: 40px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100vw;
+  background: #fff;
+
+  /* Franja naranja superior */
+  border-top: 3px solid #ff5c00;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  padding: 28px 0;
+  z-index: 999999;
 }
 
 .mega__inner {
-  display: flex;
-  gap: 50px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 45px;
+  padding: 0 60px;
 }
 
 .mega__col {
-  min-width: 160px;
+  border-right: 1px solid #e8e8e8;
+  padding-right: 30px;
+}
+.mega__col:last-child {
+  border-right: none;
 }
 
+/* Título de columna con icono */
 .mega__title {
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
   font-weight: 700;
-  color: #003b71;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 5px;
+  color: #333;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #ff5c00;
+  margin-bottom: 20px;
 }
 
-.mega__list {
-  list-style: none;
+.mega__icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+/* Bloques internos (ej: Marca, Sistemas, Mundo Apple) */
+.mega__block {
+  margin-bottom: 14px;
+}
+
+.mega__block-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ff5c00;
+  margin-bottom: 6px;
+}
+
+.mega__block-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Quitar bullets y espaciados */
+.mega__list,
+.mega__list li {
+  list-style: none !important;
   margin: 0;
   padding: 0;
 }
 
 .mega__link {
-  display: block;
-  font-size: 13px;
+  font-size: 14px;
   color: #444;
   text-decoration: none;
-  padding: 4px 0;
-  transition: color 0.15s;
+  padding: 3px 0;
+  display: block;
 }
-
 .mega__link:hover {
-  color: #ff5c00; /* Naranja Alkosto */
+  color: #ff5c00;
+  text-decoration: underline;
 }

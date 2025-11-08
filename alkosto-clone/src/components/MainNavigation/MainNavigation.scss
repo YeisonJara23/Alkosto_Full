@@ -54,3 +54,51 @@
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+.main-nav {
+  background: white;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  z-index: 300;
+}
+
+.main-nav__list {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  height: 48px;
+  align-items: center;
+  list-style: none;
+}
+
+.main-nav__item {
+  position: relative;
+}
+
+.main-nav__link {
+  text-decoration: none;
+  font-size: 14px;
+  color: #003b71;
+  padding: 6px 4px;
+}
+
+.main-nav__item:hover .mega {
+  display: block;
+}
+
+.main-nav {
+  position: relative;
+  z-index: 9999 !important; /* 🧱 Trae el menú al frente */
+}
+
+.main-navigation,
+nav,
+.header-nav {
+  position: relative;
+  z-index: 100; /* suficiente para contener el menú */
+}
+
+body.mega-open {
+  overflow: hidden;
+}
+
