@@ -2,19 +2,32 @@ import React from "react";
 import "./MegaMenu.scss";
 
 /**
- * Mapa de iconos por título de columna.
- * Usamos claves normalizadas para evitar problemas con acentos/espacios.
+ * Mapa de iconos por título de columna (normalizado).
+ * Ajusta la ruta si el nombre de archivo difiere.
+ * Las rutas son relativas a /public (sirven tal cual en <img src="/assets/...">).
  */
 const ICONS = {
+  // Celulares
   CELULARES: "/assets/icons/ICONO-CELULAR-AK.png",
   TABLETAS: "/assets/icons/ICONO-TABLET-AK.png",
   SMARTWATCH: "/assets/icons/ICONO-SMARTWATCH-AK.png",
   ACCESORIOS_CELULARES_Y_TABLETAS: "/assets/icons/ICONO-ACCESORIOS-AK.png",
   CONOCE_MAS: "/assets/icons/ICONO-CONOCE-MAS-AK.png",
   MUNDO_APPLE: "/assets/icons/mundo-apple-ak.png",
+
+  // Computadores (según tu carpeta)
+  COMPUTADORES_PORTATILES: "/assets/icons/PORTATILES-ICON-AK-2-.png",
+  COMPUTADORES_DE_ESCRITORIO_Y_ALL_IN_ONE: "/assets/icons/COMPUTADOR-ESCRITORIO-ICON-AK.png",
+  ZONA_GAMING: "/assets/icons/ZONA-GAMER-ICON-AK.png",
+  ACCESORIOS_Y_COMPLEMENTOS: "/assets/icons/ACCESORIOS-COMPUTADORES-ICON-AK.png",
+  PORTAFOLIO_EMPRESARIAL: "/assets/icons/COMPUTADOR-ESCRITORIO-ICON-AK.png", // o el que prefieras
+  IMPRESORAS_Y_MULTIFUNCIONALES: "/assets/icons/IMPRESION-ICON-AK.png",
+  MONITORES: "/assets/icons/MONITORES-ICON-AK.png",
+  PROYECTORES: "/assets/icons/PROYECTORES-ICON-AK.png",
+  TINTAS_Y_PAPEL: "/assets/icons/TINTA-PAPEL-ICON-AK.png",
 };
 
-// Normaliza títulos: sin acentos, mayúsculas y con guiones bajos
+// Normaliza: sin acentos, mayúsculas y con guiones bajos
 const norm = (str = "") =>
   str
     .normalize("NFD")
@@ -23,7 +36,7 @@ const norm = (str = "") =>
     .replace(/\s+/g, "_");
 
 const resolveIcon = (title, explicitIcon) => {
-  if (explicitIcon) return explicitIcon;
+  if (explicitIcon) return explicitIcon;               // permite override por columna
   const key = norm(title);
   return ICONS[key] || null;
 };
@@ -53,25 +66,29 @@ export default function MegaMenu({ data }) {
 
               <div className="mega__blocks">
                 {col.sections?.map((sec, secIndex) => {
-                  // Icono opcional para bloques (ej: Mundo Apple)
+                  // Icono opcional por bloque; ejemplo para "Mundo Apple"
+                  const secKey = norm(sec?.name || "");
                   const secIcon =
-                    sec.icon || (norm(sec.name) === "MUNDO_APPLE" ? ICONS.MUNDO_APPLE : null);
+                    sec?.icon ||
+                    (secKey === "MUNDO_APPLE" ? ICONS.MUNDO_APPLE : null);
 
                   return (
                     <div key={secIndex} className="mega__block">
-                      <div className="mega__block-title">
-                        {secIcon && (
-                          <img
-                            src={secIcon}
-                            alt={sec.name}
-                            className="mega__block-icon"
-                            loading="eager"
-                          />
-                        )}
-                        {sec.name}
-                      </div>
+                      {sec?.name && (
+                        <div className="mega__block-title">
+                          {secIcon && (
+                            <img
+                              src={secIcon}
+                              alt={sec.name}
+                              className="mega__block-icon"
+                              loading="eager"
+                            />
+                          )}
+                          {sec.name}
+                        </div>
+                      )}
 
-                      {Array.isArray(sec.items) && sec.items.length > 0 && (
+                      {Array.isArray(sec?.items) && sec.items.length > 0 && (
                         <ul className="mega__list">
                           {sec.items.map((item, itemIndex) => (
                             <li key={itemIndex}>

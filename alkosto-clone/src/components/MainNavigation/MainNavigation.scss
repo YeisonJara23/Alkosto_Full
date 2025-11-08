@@ -1,104 +1,99 @@
+/* Barra ocupa TODO el ancho de la página */
 .main-nav {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e6e6e6;
   width: 100%;
+  background: #fff;
+  border-top: 1px solid #e9e9e9;
+  border-bottom: 1px solid #e9e9e9;
   position: relative;
-  z-index: 200;
+  z-index: 1000;
 }
 
+/* ⬇️ Antes: max-width: 1400px;  —>  Ahora: 100% para cubrir de lado a lado */
+.main-nav__container {
+  width: 100%;
+  max-width: 100%;         /* fuerza a ocupar todo el ancho */
+  margin: 0 auto;
+  padding: 0 24px;         /* deja un pequeño respiro lateral (ajústalo si quieres 0) */
+}
+
+/* Lista centrada, sin scrollbar */
 .main-nav__list {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 1.6rem;
-  padding: 0 2rem;
-  height: 50px;
   list-style: none;
+  margin: 0;
+  padding: 10px 0;
+  flex-wrap: wrap;         /* evita que sobrepase y aparezca scroll */
+  gap: 0;                  /* mantenemos separadores con ::before, no gap */
+  white-space: normal;     /* permite saltos de línea si hace falta */
+  overflow: visible;       /* fuera el “scroll” horizontal */
 }
 
+/* Ítems con el separador vertical “ | ” */
 .main-nav__item {
   position: relative;
-  display: flex;
-  align-items: center;
+  padding: 0 10px;
 }
 
+/* separador a partir del 2º ítem */
+.main-nav__item + .main-nav__item::before {
+  content: "|";
+  color: #c8d2e1;
+  margin-right: 10px;
+  pointer-events: none;
+}
+
+/* Links */
 .main-nav__link {
-  font-size: 14px;
-  font-weight: 500;
-  color: #003b71; /* Azul Alkosto */
+  color: #004797;
   text-decoration: none;
-  padding: 6px 4px;
-  transition: color 0.2s ease-in-out;
+  font-size: 15px;
+  white-space: nowrap;
+  line-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px;
+  transition: color .15s ease;
 }
 
-.main-nav__link:hover {
-  color: #ff5c00; /* Naranja Alkosto */
+.main-nav__link:hover { color: #ff5c00; }
+
+/* Franja naranja del activo */
+.main-nav__link.is-active {
+  position: relative;
+  color: #004797;
+  font-weight: 600;
 }
 
-/* MegaMenu aparece debajo del item */
-.main-nav__item:hover .mega {
-  display: block;
-}
-
-/* Animación apareciendo */
-.mega {
-  display: none;
+.main-nav__link.is-active::after {
+  content: "";
   position: absolute;
-  top: 100%;
   left: 0;
-  padding-top: 10px;
-  opacity: 0;
-  animation: fadeIn 0.25s forwards ease-in-out;
+  right: 0;
+  bottom: -12px;    /* ajusta si tu header es más alto o bajo */
+  height: 4px;
+  background: #ff6a00;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* Botón destacado (Navidad) */
+.is-featured .main-nav__link {
+  background: #ff6a00;
+  color: #fff;
+  border-radius: 3px;
+  padding: 6px 10px;
+}
+.is-featured .main-nav__link:hover {
+  color: #fff;
+  filter: brightness(0.95);
 }
 
-.main-nav {
-  background: white;
-  border-bottom: 1px solid #ddd;
-  position: relative;
-  z-index: 300;
+/* MegaMenu holder (se mantiene igual) */
+.mega-holder {
+  position: absolute;
+  left: 0;
+  right: 0;      /* ahora se estira igual que la barra */
+  top: 100%;
+  z-index: 999999;
 }
-
-.main-nav__list {
-  display: flex;
-  gap: 1.5rem;
-  padding: 0 2rem;
-  height: 48px;
-  align-items: center;
-  list-style: none;
-}
-
-.main-nav__item {
-  position: relative;
-}
-
-.main-nav__link {
-  text-decoration: none;
-  font-size: 14px;
-  color: #003b71;
-  padding: 6px 4px;
-}
-
-.main-nav__item:hover .mega {
-  display: block;
-}
-
-.main-nav {
-  position: relative;
-  z-index: 9999 !important; /* 🧱 Trae el menú al frente */
-}
-
-.main-navigation,
-nav,
-.header-nav {
-  position: relative;
-  z-index: 100; /* suficiente para contener el menú */
-}
-
-body.mega-open {
-  overflow: hidden;
-}
-
+.mega-holder .mega { z-index: 999999; }
