@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import MegaMenu from "../MegaMenu/MegaMenu";
 
+
 import { MEGA_MENU_CELULARES } from "../../data/megaMenu.celulares";
 import { MEGA_MENU_COMPUTADORES } from "../../data/megaMenu.computadores"; // ✅ NUEVO
+import { MEGA_MENU_ELECTRODOMESTICOS } from "../../data/megaMenu.electrodomesticos";
 import "./MainNavigation.scss";
 
 const MENU_ITEMS = [
   { id: "celulares", label: "Celulares", mega: MEGA_MENU_CELULARES },
   { id: "computadores", label: "Computadores", mega: MEGA_MENU_COMPUTADORES }, // ✅ con mega
-  { id: "electrodomesticos", label: "Electrodomésticos" },
+  { id: "electrodomesticos", label: "Electrodomésticos", mega: MEGA_MENU_ELECTRODOMESTICOS },
   { id: "tv", label: "TV" },
   { id: "accesorios", label: "Accesorios" },
   { id: "videojuegos", label: "Videojuegos" },

@@ -25,6 +25,16 @@ const ICONS = {
   MONITORES: "/assets/icons/MONITORES-ICON-AK.png",
   PROYECTORES: "/assets/icons/PROYECTORES-ICON-AK.png",
   TINTAS_Y_PAPEL: "/assets/icons/TINTA-PAPEL-ICON-AK.png",
+
+  REFRIGERACION: "/assets/icons/REFRIGERACION-ICON-AK.png",
+  LAVADORAS_Y_SECADORAS: "/assets/icons/LAVADO-ICON-AK.png",
+  COCINA: "/assets/icons/COCINA-ICON-AK.png",
+  PREPARACION_DE_ALIMENTOS: "/assets/icons/PREPARACION-ALIMENTOS-ICON-AK.png",
+  CLIMATIZACION: "/assets/icons/CLIMATIZACION-ICON-AK.png",
+  CUIDADO_PERSONAL: "/assets/icons/CUIDADO-PERSONAL-ICON-AK.png",
+  CUIDADO_DEL_HOGAR: "/assets/icons/CUIDADO-HOGAR-ICON-AK.png",
+  OTROS_ELECTROHOGAR: "/assets/icons/OTROS-ELECTROHOGAR-ICON-AK.png",
+  ACCESORIOS_Y_REPUESTOS: "/assets/icons/accesorios-ak.png",
 };
 
 // Normaliza: sin acentos, mayúsculas y con guiones bajos
