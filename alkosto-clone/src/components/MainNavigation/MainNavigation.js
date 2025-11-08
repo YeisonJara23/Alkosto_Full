@@ -6,13 +6,14 @@ import MegaMenu from "../MegaMenu/MegaMenu";
 import { MEGA_MENU_CELULARES } from "../../data/megaMenu.celulares";
 import { MEGA_MENU_COMPUTADORES } from "../../data/megaMenu.computadores"; // ✅ NUEVO
 import { MEGA_MENU_ELECTRODOMESTICOS } from "../../data/megaMenu.electrodomesticos";
+import { MEGA_MENU_TV } from "../../data/megaMenu.tv"; 
 import "./MainNavigation.scss";
 
 const MENU_ITEMS = [
   { id: "celulares", label: "Celulares", mega: MEGA_MENU_CELULARES },
   { id: "computadores", label: "Computadores", mega: MEGA_MENU_COMPUTADORES }, // ✅ con mega
   { id: "electrodomesticos", label: "Electrodomésticos", mega: MEGA_MENU_ELECTRODOMESTICOS },
-  { id: "tv", label: "TV" },
+  { id: "tv", label: "TV", mega: MEGA_MENU_TV }, 
   { id: "accesorios", label: "Accesorios" },
   { id: "videojuegos", label: "Videojuegos" },
   { id: "audio", label: "Audio" },

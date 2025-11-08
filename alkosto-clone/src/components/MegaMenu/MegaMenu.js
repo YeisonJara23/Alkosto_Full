@@ -35,6 +35,14 @@ const ICONS = {
   CUIDADO_DEL_HOGAR: "/assets/icons/CUIDADO-HOGAR-ICON-AK.png",
   OTROS_ELECTROHOGAR: "/assets/icons/OTROS-ELECTROHOGAR-ICON-AK.png",
   ACCESORIOS_Y_REPUESTOS: "/assets/icons/accesorios-ak.png",
+
+    // TV
+  TELEVIS0RES: "/assets/icons/TV-ICON-AK.png",                 // (fallback por si normaliza)
+  TELEVISORES: "/assets/icons/TV-ICON-AK.png",
+  PROYECTORES: "/assets/icons/PROYECTORES-ICON-AK.png",
+  COMPLEMENTOS_DE_TV: "/assets/icons/TV-COMPLEMENTOS-ICON-AK.png",
+  ACCESORIOS_TV: "/assets/icons/TV-ACCESORIOS-ICON-AK.png",
+  NETFLIX_Y_PINES: "/assets/icons/NETFLIX-ICON-AK.png",
 };
 
 // Normaliza: sin acentos, mayúsculas y con guiones bajos
