@@ -7,24 +7,37 @@ import { MEGA_MENU_CELULARES } from "../../data/megaMenu.celulares";
 import { MEGA_MENU_COMPUTADORES } from "../../data/megaMenu.computadores"; // ✅ NUEVO
 import { MEGA_MENU_ELECTRODOMESTICOS } from "../../data/megaMenu.electrodomesticos";
 import { MEGA_MENU_TV } from "../../data/megaMenu.tv"; 
+import { MEGA_MENU_ACCESORIOS } from "../../data/megaMenu.accesorios";
+import { MEGA_MENU_VIDEOJUEGOS } from "../../data/megaMenu.videojuegos";
+import { MEGA_MENU_AUDIO } from "../../data/megaMenu.audio";
+import { MEGA_MENU_CAMARAS } from "../../data/megaMenu.camaras";
+import { MEGA_MENU_PINES } from "../../data/megaMenu.pines";
+import { MEGA_MENU_HOGAR } from "../../data/megaMenu.hogar";
+import { MEGA_MENU_DEPORTES } from "../../data/megaMenu.deportes";
+import { MEGA_MENU_LLANTAS_MOTOS } from "../../data/megaMenu.llantas_motos";
+import { MEGA_MENU_JUGUETES } from "../../data/megaMenu.juguetes";
+import { MEGA_MENU_OTROS } from "../../data/mehaMenu.otros";
+import { MEGA_MENU_NAVIDAD } from "../../data/megaMenu.navidad";
 import "./MainNavigation.scss";
+
+
 
 const MENU_ITEMS = [
   { id: "celulares", label: "Celulares", mega: MEGA_MENU_CELULARES },
   { id: "computadores", label: "Computadores", mega: MEGA_MENU_COMPUTADORES }, // ✅ con mega
   { id: "electrodomesticos", label: "Electrodomésticos", mega: MEGA_MENU_ELECTRODOMESTICOS },
   { id: "tv", label: "TV", mega: MEGA_MENU_TV }, 
-  { id: "accesorios", label: "Accesorios" },
-  { id: "videojuegos", label: "Videojuegos" },
-  { id: "audio", label: "Audio" },
-  { id: "camaras", label: "Cámaras" },
-  { id: "pines", label: "Pines" },
-  { id: "hogar", label: "Hogar" },
-  { id: "deportes", label: "Deportes" },
-  { id: "llantas-y-motos", label: "Llantas y Motos" },
-  { id: "juguetes", label: "Juguetes" },
-  { id: "navidad", label: "Navidad", featured: true },
-  { id: "otros", label: "Otros" },
+  { id: "accesorios", label: "Accesorios", mega: MEGA_MENU_ACCESORIOS },
+  { id: "videojuegos", label: "Videojuegos", mega: MEGA_MENU_VIDEOJUEGOS },
+  { id: "audio", label: "Audio", mega: MEGA_MENU_AUDIO },
+  { id: "camaras", label: "Cámaras", mega: MEGA_MENU_CAMARAS },
+  { id: "pines", label: "Pines", mega: MEGA_MENU_PINES },
+  { id: "hogar", label: "Hogar", mega: MEGA_MENU_HOGAR },
+  { id: "deportes", label: "Deportes", mega: MEGA_MENU_DEPORTES },
+  { id: "llantas-y-motos", label: "Llantas y Motos", mega: MEGA_MENU_LLANTAS_MOTOS },
+  { id: "juguetes", label: "Juguetes", mega: MEGA_MENU_JUGUETES },
+  { id: "navidad", label: "Navidad", mega: MEGA_MENU_NAVIDAD },
+  { id: "otros", label: "Otros", mega: MEGA_MENU_OTROS },
 ];
 
 export default function MainNavigation() {

@@ -34,9 +34,7 @@
   padding-right: 28px;
   border-right: 1px solid #ececec;
 }
-.mega__col:last-child {
-  border-right: none;
-}
+.mega__col:last-child { border-right: none; }
 
 /* ===== Título de columna (con icono y subrayado corto naranja) ===== */
 .mega__title {
@@ -51,9 +49,7 @@
   line-height: 1.2;
   padding-bottom: 9px;
 }
-
 .mega__title::after {
-  /* subrayado corto naranja, como en la página original */
   content: "";
   position: absolute;
   left: 0;
@@ -63,30 +59,26 @@
   background: #ff5c00;
   border-radius: 2px;
 }
-
 .mega__icon {
   width: 22px;
   height: 22px;
   object-fit: contain;
 }
 
-/* ===== Bloques internos (ej.: Marca, Sistemas…) ===== */
-.mega__block {
-  margin: 0 0 14px;
-}
+/* ===== Bloques internos ===== */
+.mega__block { margin: 0 0 14px; }
 
-/* ✅ Subtítulo de bloque en NARANJA (negrita) */
+/* ✅ Subtítulo de bloque en NEGRO (ya no naranja) */
 .mega__block-title {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #ff5c00;         /* ← naranja */
+  color: #222;              /* ← negro */
   font-size: 13px;
   font-weight: 700;
   line-height: 1.3;
   margin: 0 0 6px;
 }
-
 .mega__block-icon {
   width: 18px;
   height: 18px;
@@ -105,31 +97,22 @@
 .mega__link {
   display: block;
   font-size: 13px;
-  color: #333;               /* negro suave */
+  color: #333 !important;   /* negro suave; !important por si hay estilos globales */
   text-decoration: none;
   padding: 2px 0;
   line-height: 1.55;
 }
-
 .mega__link:hover {
   color: #ff5c00;
   text-decoration: underline;
 }
 
-/* ===== Ajustes finos opcionales ===== */
-
 /* Reduce un poco la separación cuando hay muchos bloques */
-.mega__col .mega__block + .mega__block {
-  margin-top: 10px;
-}
+.mega__col .mega__block + .mega__block { margin-top: 10px; }
 
-/* ✅ Por si usas <strong>/<b> en títulos o texto dentro del mega */
+/* ❌ Quitar el forzado a naranja de negritas dentro del mega */
 .mega strong,
 .mega b {
-  color: #ff5c00;
+  color: inherit;           /* o #222; */
   font-weight: 700;
 }
-
-/* Si alguna regla global pinta los <a> en otro color,
-   puedes forzar el color base de los enlaces dentro del mega */
-/* .mega a { color: #333 !important; } */
