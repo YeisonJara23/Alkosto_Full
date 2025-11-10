@@ -5,69 +5,159 @@
 
   h1 {
     margin-bottom: 20px;
+    font-weight: 800;
+    font-size: 28px;
+  }
+
+  &.empty {
+    text-align: center;
+
+    .co__link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #1f4aa8;
+      font-weight: 700;
+      text-decoration: none;
+    }
   }
 
   .checkout-container {
     display: flex;
     gap: 40px;
+
+    @media (max-width: 992px) {
+      flex-direction: column;
+    }
   }
 
+  /* -------- Formulario -------- */
   .checkout-form {
     flex: 2;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 20px;
+
+    h2 {
+      margin: 0 0 5px;
+      font-size: 18px;
+      font-weight: 800;
+    }
 
     input,
     select {
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
+      height: 44px;
+      padding: 0 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+
+      &:focus {
+        outline: 2px solid #c7d2fe;
+      }
     }
 
     .confirm-btn {
-      background: #28a745;
-      color: white;
+      margin-top: 6px;
+      height: 44px;
+      background: #e95e27;
+      color: #fff;
       border: none;
-      padding: 15px;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 18px;
-      font-weight: bold;
+      font-size: 16px;
+      font-weight: 800;
 
       &:hover {
-        background: #218838;
+        filter: brightness(0.96);
       }
     }
   }
 
+  /* -------- Resumen -------- */
   .checkout-summary {
     flex: 1;
-    background: #f9f9f9;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px;
+    height: fit-content;
+    position: sticky;
+    top: 24px;
 
     h2 {
-      margin-bottom: 15px;
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 800;
     }
 
-    ul {
+    .sum__list {
       list-style: none;
       padding: 0;
+      margin: 0 0 8px;
+      display: grid;
+      gap: 10px;
+    }
 
-      li {
-        margin-bottom: 10px;
-        font-size: 14px;
+    .sum__item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 1px solid #f1f5f9;
+
+      &:first-child {
+        border-top: 0;
       }
     }
 
-    .total {
+    .sum__item-left {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .sum__thumb {
+      width: 54px;
+      height: 54px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #f8fafc;
+      border: 1px solid #eef2f7;
+    }
+
+    .sum__name {
+      font-weight: 700;
+    }
+
+    .sum__brand,
+    .sum__qty {
+      color: #6b7280;
+      font-size: 12px;
+    }
+
+    .sum__line-total {
+      font-weight: 800;
+    }
+
+    .sum__row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .sum__total {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0 4px;
+      border-top: 1px solid #f1f5f9;
       font-size: 18px;
-      font-weight: bold;
-      color: #e95e27;
-      margin-top: 15px;
+      font-weight: 800;
     }
   }
 }

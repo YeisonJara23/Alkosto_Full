@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { categories } from '../data/categories';
 import { products } from '../data/products';
-import ProductCard from '../components/ProductCard/ProductCard';
+
+// 👉 Recomendado: usa un index.js en la carpeta ProductCard
+// src/components/ProductCard/index.js -> export { default } from './ProductCard';
+import ProductCard from '../components/ProductCard/ProductCard.js'; // o .jsx si ese es el caso
+
+
 import './CategoryPage.scss';
 
 const CategoryPage = () => {
@@ -20,13 +25,19 @@ const CategoryPage = () => {
     setCategory(foundCategory);
 
     // Filtrar productos por categoría
-    const catProducts = products.filter(product => 
-      product.category === categoryId || 
+    const catProducts = products.filter(product =>
+      product.category === categoryId ||
       (foundCategory?.subcategories?.some(sub => sub.id === product.category))
     );
-    
+
     setCategoryProducts(catProducts);
     setFilteredProducts(catProducts);
+
+    // Ajustar el rango de precio al máximo real
+    const max = catProducts.length
+      ? Math.max(...catProducts.map(p => p.price))
+      : 0;
+    setPriceRange([0, max || 10000000]);
   }, [categoryId]);
 
   useEffect(() => {
@@ -34,13 +45,13 @@ const CategoryPage = () => {
 
     // Filtrar por marca
     if (selectedBrands.length > 0) {
-      filtered = filtered.filter(product => 
-        selectedBrands.includes(product.brand.toLowerCase())
+      filtered = filtered.filter(product =>
+        selectedBrands.includes((product.brand || '').toLowerCase())
       );
     }
 
     // Filtrar por precio
-    filtered = filtered.filter(product => 
+    filtered = filtered.filter(product =>
       product.price >= priceRange[0] && product.price <= priceRange[1]
     );
 
@@ -54,7 +65,7 @@ const CategoryPage = () => {
         case 'name':
           return a.name.localeCompare(b.name);
         case 'rating':
-          return b.rating - a.rating;
+          return (b.rating || 0) - (a.rating || 0);
         default:
           return 0;
       }
@@ -63,11 +74,13 @@ const CategoryPage = () => {
     setFilteredProducts(filtered);
   }, [categoryProducts, sortBy, priceRange, selectedBrands]);
 
-  const brands = [...new Set(categoryProducts.map(p => p.brand))];
-  const maxPrice = Math.max(...categoryProducts.map(p => p.price), 0);
+  const brands = [...new Set(categoryProducts.map(p => p.brand).filter(Boolean))];
+  const maxPrice = categoryProducts.length
+    ? Math.max(...categoryProducts.map(p => p.price))
+    : 0;
 
   const handleBrandFilter = (brand) => {
-    const brandLower = brand.toLowerCase();
+    const brandLower = (brand || '').toLowerCase();
     setSelectedBrands(prev =>
       prev.includes(brandLower)
         ? prev.filter(b => b !== brandLower)
@@ -104,7 +117,7 @@ const CategoryPage = () => {
           <aside className="filters-sidebar">
             <div className="filter-section">
               <h3>Filtrar por</h3>
-              
+
               {/* Filtro de Marcas */}
               <div className="filter-group">
                 <h4>Marca</h4>
@@ -112,7 +125,7 @@ const CategoryPage = () => {
                   <label key={brand} className="filter-checkbox">
                     <input
                       type="checkbox"
-                      checked={selectedBrands.includes(brand.toLowerCase())}
+                      checked={selectedBrands.includes((brand || '').toLowerCase())}
                       onChange={() => handleBrandFilter(brand)}
                     />
                     <span className="checkmark"></span>
@@ -128,26 +141,29 @@ const CategoryPage = () => {
                   <input
                     type="range"
                     min="0"
-                    max={maxPrice}
+                    max={maxPrice || 10000000}
                     value={priceRange[1]}
-                    onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
+                    onChange={(e) => setPriceRange([0, parseInt(e.target.value, 10)])}
                     className="price-slider"
                   />
                   <div className="price-labels">
                     <span>$0</span>
-                    <span>${priceRange[1].toLocaleString()}</span>
+                    <span>
+                      $
+                      {(priceRange[1] || 0).toLocaleString("es-CO")}
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* Filtro de Ofertas */}
+              {/* Filtro de Ofertas (placeholder) */}
               <div className="filter-group">
                 <h4>Ofertas</h4>
                 <label className="filter-checkbox">
                   <input
                     type="checkbox"
                     onChange={() => {
-                      // Lógica para filtrar ofertas
+                      // Implementa aquí tu lógica de ofertas si la tienes
                     }}
                   />
                   <span className="checkmark"></span>
@@ -161,7 +177,7 @@ const CategoryPage = () => {
           <main className="products-main">
             <div className="products-header">
               <div className="products-count">
-                {filteredProducts.length} productos encontrados
+                {filteredProducts.length} producto{filteredProducts.length !== 1 ? 's' : ''} encontrados
               </div>
               <div className="sort-filter">
                 <label>Ordenar por:</label>
