@@ -1,0 +1,52 @@
+.featured-deals {
+  background: #fff;
+  padding: 8px 0 28px;
+}
+
+.featured-deals__container {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.featured-deals__title {
+  color: #0b4aa1;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 20px 0 12px;
+}
+
+.deals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.deal-card a {
+  display: block;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 8px rgba(0,0,0,.08);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.deal-card a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+}
+
+.deal-card img {
+  display: block;
+  width: 100%;
+  height: 360px;      /* altura similar a Alkosto */
+  object-fit: cover;  /* que siempre se vea completa */
+}
+
+@media (max-width: 1100px) {
+  .deals-grid { grid-template-columns: repeat(2, 1fr); }
+  .deal-card img { height: 320px; }
+}
+@media (max-width: 640px) {
+  .deals-grid { grid-template-columns: 1fr; }
+  .deal-card img { height: 260px; }
+}

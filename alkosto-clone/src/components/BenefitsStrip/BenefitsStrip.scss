@@ -1,0 +1,74 @@
+.benefits-strip {
+  background: #f5f6f7;
+  padding: 0 0 18px;
+}
+
+.benefits-strip__container {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Caja blanca con 4 columnas y separadores */
+.benefits-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.benefits-item {
+  position: relative;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Separador vertical entre items */
+.benefits-item + .benefits-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 24px;
+  background: #e6e6e6;
+}
+
+.benefits-item a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 10px;
+  text-decoration: none;
+  color: #0b4aa1;     /* azul Alkosto */
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.benefits-item a:hover {
+  text-decoration: underline;
+}
+
+.benefits-item img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .benefits-box { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .benefits-box { grid-template-columns: 1fr; }
+  .benefits-item { justify-content: flex-start; padding-left: 16px; }
+  .benefits-item + .benefits-item::before { display: none; }
+}
