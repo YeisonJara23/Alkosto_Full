@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginModal.scss';
 
@@ -17,6 +17,15 @@ const LoginModal = ({ onClose, onSuccess = () => {} }) => {
   const [error, setError] = useState('');
 
   const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+  // ESC para cerrar (si no está cargando)
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape' && !loading) onClose?.();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [loading, onClose]);
 
   const handleOverlayClick = () => {
     if (!loading) onClose?.();
@@ -54,7 +63,11 @@ const LoginModal = ({ onClose, onSuccess = () => {} }) => {
       setStep('password');
       setError('');
     } catch (err) {
-      setError(err.message || 'Ocurrió un error.');
+      setError(
+        err?.message === 'Failed to fetch'
+          ? 'No se pudo conectar con el servidor. Verifica que el backend esté disponible y CORS permita http://localhost:3000.'
+          : err.message || 'Ocurrió un error.'
+      );
     } finally {
       setLoading(false);
     }
@@ -96,12 +109,12 @@ const LoginModal = ({ onClose, onSuccess = () => {} }) => {
       if (data?.user) localStorage.setItem('auth_user', JSON.stringify(data.user));
 
       onSuccess(data);
-      onClose();
+      onClose?.();
     } catch (err) {
       const msg =
         err?.message === 'Failed to fetch'
-          ? 'No se pudo conectar con el servidor. Verifica que el backend esté en http://127.0.0.1:8000 y CORS permita http://localhost:3000.'
-          : (err.message || 'Ocurrió un error inesperado.');
+          ? 'No se pudo conectar con el servidor. Verifica que el backend esté en http://127.0.0.1:8000 y que CORS permita http://localhost:3000.'
+          : err.message || 'Ocurrió un error inesperado.';
       setError(msg);
     } finally {
       setLoading(false);
@@ -120,6 +133,14 @@ const LoginModal = ({ onClose, onSuccess = () => {} }) => {
         <div className="login-header">
           <h2 id="login-title">Ingresar o crear cuenta</h2>
           <p>Accede a tus datos personales, tus pedidos y solicita devoluciones:</p>
+          <button
+            type="button"
+            className="login-close"
+            onClick={() => !loading && onClose?.()}
+            aria-label="Cerrar"
+          >
+            ×
+          </button>
         </div>
 
         {/* Paso 1: solo email */}
@@ -134,12 +155,14 @@ const LoginModal = ({ onClose, onSuccess = () => {} }) => {
               autoComplete="email"
               disabled={loading}
               aria-invalid={!!error}
+              autoFocus
             />
-            {error && <p className="login-error">El correo no es válido</p>}
+            {error && <p className="login-error" role="alert">{error}</p>}
+
             <button type="submit" disabled={loading || !email.trim()}>
               {loading ? 'Validando…' : 'Continuar'}
             </button>
-        </form>
+          </form>
         )}
 
         {/* Paso 2: pedir contraseña (email existente) */}
@@ -155,13 +178,21 @@ const LoginModal = ({ onClose, onSuccess = () => {} }) => {
               autoComplete="current-password"
               disabled={loading}
               minLength={8}
+              autoFocus
             />
             {error && <p className="login-error" role="alert">{error}</p>}
+
             <div style={{ display: 'flex', gap: 8 }}>
               <button
                 type="button"
                 className="btn-ghost"
-                onClick={() => { if (!loading) { setStep('email'); setPassword(''); setError(''); } }}
+                onClick={() => {
+                  if (!loading) {
+                    setStep('email');
+                    setPassword('');
+                    setError('');
+                  }
+                }}
               >
                 Cambiar correo
               </button>

@@ -5,69 +5,52 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
-    /**
-     * Registrar usuario
-     *
-     * Crea una nueva cuenta y devuelve token + usuario.
-     */
-    public function register(Request $request): JsonResponse
+    public function register(Request $request)
     {
         $data = $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'confirmed', Password::defaults()],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        // Gracias al cast 'password' => 'hashed' en User, se cifra automáticamente.
         $user = User::create([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => $data['password'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
 
-        $token = $user->createToken('api-token')->plainTextToken;
+        $token = $user->createToken('api')->plainTextToken;
 
         return response()->json([
-            'success' => true,
-            'user'    => $user,
-            'token'   => $token,
-            'message' => 'Usuario registrado exitosamente',
+            'message' => 'Usuario registrado exitosamente.',
+            'user' => $user,
+            'token' => $token,
         ], 201);
     }
 
-    /**
-     * Verificar si un email existe (para el modal de login/registro)
-     *
-     * GET /api/auth/check-email?email=...
-     * Respuesta: { "exists": true|false }
-     */
-    public function checkEmail(Request $request): JsonResponse
+    public function verifyAccount(Request $request)
     {
-        $validated = $request->validate([
-            'email' => ['required', 'email'],
+        // Implementar verificación de cuenta si es necesario
+        return response()->json([
+            'message' => 'Método de verificación de cuenta',
         ]);
-
-        // Normaliza el correo por seguridad
-        $email  = strtolower(trim($validated['email']));
-        // En la mayoría de motores (MySQL por defecto) el match es case-insensitive
-        $exists = User::where('email', $email)->exists();
-
-        return response()->json(['exists' => $exists]);
     }
 
-    /**
-     * (Opcional) Verificar cuenta
-     */
-    public function verifyAccount(Request $request): JsonResponse
+    public function checkEmail(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $exists = User::where('email', $request->email)->exists();
+
         return response()->json([
-            'success' => true,
-            'message' => 'Cuenta verificada exitosamente',
+            'exists' => $exists,
         ]);
     }
 }

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import CartWidget from "./CartWidget";
 import SearchBar from "./SearchBar";
 import LoginModal from "../common/Modal/LoginModal";
-import MainNavigation from "../MainNavigation/MainNavigation"; // ✅ IMPORTANTE
+import MainNavigation from "../MainNavigation/MainNavigation";
+import AccountPanel from "../AccountPanel/AccountPanel";     // ⬅️ NUEVO
+import "../AccountPanel/account-panel.scss";                 // ⬅️ estilos del panel/portal
 import "./Header.scss";
 
 // Logo desde /src/assets/images/logo
@@ -13,14 +15,11 @@ const Header = () => {
 
   return (
     <header className="header">
-
       {/* 🔹 Header principal */}
       <div className="header-main">
         <div className="container header-main-container">
-
           {/* ===== Fila superior ===== */}
           <div className="header-top-row">
-
             {/* Logo */}
             <div className="header-logo">
               <a href="/" aria-label="Ir al inicio">
@@ -42,7 +41,6 @@ const Header = () => {
           {/* ===== Fila inferior ===== */}
           <div className="header-bottom-row">
             <div className="header-right-group">
-
               {/* Buscador */}
               <div className="header-search">
                 <SearchBar />
@@ -54,6 +52,9 @@ const Header = () => {
                   type="button"
                   className="account-link"
                   onClick={() => setIsLoginOpen(true)}
+                  aria-haspopup="dialog"
+                  aria-expanded={isLoginOpen}
+                  aria-controls="account-panel"
                   aria-label="Abrir Mi cuenta"
                 >
                   <i className="alk-icon-user" aria-hidden="true"></i>
@@ -64,19 +65,28 @@ const Header = () => {
                   <CartWidget />
                 </div>
               </div>
-
             </div>
           </div>
-
         </div>
       </div>
 
-      {/* ✅ Aquí colocamos el menú con MegaMenu */}
+      {/* ✅ Menú principal con MegaMenu */}
       <MainNavigation />
 
-      {/* 🔹 Modal de login */}
-      {isLoginOpen && <LoginModal onClose={() => setIsLoginOpen(false)} />}
-
+      {/* ✅ Panel de “Mi cuenta” montado como PORTAL (siempre por encima) */}
+      <AccountPanel
+        open={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+      >
+        {/* 
+          Si tu LoginModal ya tiene backdrop propio, puedes pasarle un prop para modo “inline”
+          o directamente colocar aquí su contenido.
+          Si te funciona bien tal cual, lo dejamos así:
+        */}
+        <div id="account-panel">
+          <LoginModal onClose={() => setIsLoginOpen(false)} />
+        </div>
+      </AccountPanel>
     </header>
   );
 };

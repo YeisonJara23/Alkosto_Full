@@ -1,13 +1,31 @@
 <?php
 
 return [
-    'paths' => ['api/*'], // basta con la API
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cross-Origin Resource Sharing (CORS) Configuration
+    |--------------------------------------------------------------------------
+    */
+
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+
     'allowed_methods' => ['*'],
-    // Para depurar: permite TODOS los orígenes (temporalmente)
-    'allowed_origins' => ['*'],
+
+    'allowed_origins' => [
+        'http://localhost:3000',
+        'http://127.0.0.1:3000',
+        'http://localhost:5173', // Para Vite
+        'http://127.0.0.1:5173',
+    ],
+
     'allowed_origins_patterns' => [],
+
     'allowed_headers' => ['*'],
+
     'exposed_headers' => [],
-    'max_age' => 3600,
-    'supports_credentials' => false, // usamos Bearer token, NO cookies
+
+    'max_age' => 0,
+
+    'supports_credentials' => true,
 ];
