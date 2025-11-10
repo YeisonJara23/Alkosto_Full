@@ -12,6 +12,7 @@ import NavidadDecor from "../components/NavidadDecor/NavidadDecor";
 import BrandsStrip from "../components/BrandsStrip/BrandsStrip";
 import InstallServices from "../components/InstallServices/InstallServices";
 import PaymentOffers from "../components/PaymentOffers/PaymentOffers";
+import VideoBanner from "../components/VideoBanner/VideoBanner"; //
 
 
 import "./HomePage.scss";
@@ -186,7 +187,9 @@ export default function HomePage() {
 
       {/* ===== OFERTAS / MEDIOS DE PAGO / PAGA FÁCIL ===== */}
       <PaymentOffers />
-      
+      <VideoBanner
+      src="/images/banners/gana50.mp4"
+       />
     </main>
   );
 }

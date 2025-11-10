@@ -1,0 +1,29 @@
+.video-banner {
+  background: #fff;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid #eee;
+
+  &__container {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    padding: 0 16px 16px;
+  }
+
+  /* El video siempre se verá completo (letterboxing si hace falta) */
+  &__video {
+    display: block;
+    width: 100%;
+    height: auto;         /* mantiene proporción nativa del video */
+    object-fit: contain;  /* evita recortes */
+    border-radius: 8px;
+    background: #0b4aa1;  /* color de “barras” si sobran lados */
+    pointer-events: none; /* oculta overlays de algunos navegadores */
+  }
+
+  /* Safari */
+  &__video::-webkit-media-controls {
+    display: none !important;
+    -webkit-appearance: none;
+  }
+}
