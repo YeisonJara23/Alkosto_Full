@@ -108,8 +108,8 @@ export default function HeroCarousel({
     >
       <div className="hero-carousel__inner">
         <div
-          className={`hero-slide ${current.bg ? `bg-${current.bg}` : ""}`}
-          style={current.img ? { backgroundImage: `url(${current.img})` } : undefined}
+          className="hero-slide"
+          style={{ "--slide-img": `url(${current.img})` }}
           aria-label={current.title || "Slide"}
         >
           <div className="hero-slide__content">

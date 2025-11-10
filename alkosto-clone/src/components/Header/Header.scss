@@ -1,55 +1,50 @@
 .header {
   width: 100%;
-  font-family: Arial, sans-serif;
-  position: relative;       /* ✅ Nuevo */
-  z-index: 2000;            /* ✅ Header delante del banner */
+  font-family: "Arial", sans-serif;
+  position: relative;
+  z-index: 2000;
 }
 
-
-/* 🔹 Bloque azul principal (fondo sólido) */
+/* 🔹 Fondo azul superior */
 .header-main {
-  /* Si prefieres imagen de fondo, comenta la línea de color y usa background-image */
-  background: #0c65c8; /* azul sólido */
-  /* background: url("/images/fondo/fondo-azul.webp") no-repeat center/cover; */
-  padding: 0;
-  height: 150px;             /* altura del bloque azul */
+  background-color: #004899; /* azul institucional Alkosto */
+  height: 145px;
   display: flex;
   align-items: center;
+  padding: 0;
 }
 
 .header-main-container {
+  width: min(1280px, 95%);
+  margin: 0 auto;
   display: grid;
   grid-template-rows: auto auto;
-  gap: 0;
-  max-width: 1280px;
-  margin: 0 auto;
+  row-gap: 6px;
 }
 
-/* ===== Fila superior ===== */
+/* ===== FILA SUPERIOR ===== */
 .header-top-row {
-  display: grid;
-  grid-template-columns: auto 1fr; /* logo + resto (ya NO hay hiperofertas) */
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 60px;
 }
 
-/* Logo más grande */
+/* Logo */
 .header-logo img {
-  height: 100px;  /* antes ~120px → ahora un poco más grande */
+  height: 90px;
   width: auto;
   display: block;
 }
 
-/* Teléfonos + links (tipografía más grande) */
+/* Teléfonos y enlaces */
 .header-info-links {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 20px;
-  color: #fff;
-  font-size: 15.5px; /* ↑ */
-  white-space: nowrap;
   flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+  font-size: 14.5px;
+  color: #fff;
 
   .strong {
     font-weight: 700;
@@ -58,92 +53,102 @@
   a {
     color: #fff;
     text-decoration: none;
-    font-size: 15.5px; /* ↑ */
+    padding: 0 8px;
+    font-weight: 400;
     position: relative;
-    padding: 0 10px;
   }
 
   a:not(:last-child)::after {
     content: "|";
+    color: rgba(255, 255, 255, 0.7);
     position: absolute;
-    right: -4px;
-    color: #fff;
+    right: -5px;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 }
 
-/* ===== Fila inferior ===== */
+/* ===== FILA INFERIOR ===== */
 .header-bottom-row {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  margin-top: -6px;
-  padding-top: 0;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
 }
 
-/* Agrupa buscador + acciones */
+/* Buscador + acciones */
 .header-right-group {
   display: flex;
   align-items: center;
-  gap: 280px;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 140px;
 }
 
-/* Buscador (tipografía más grande) */
+/* Buscador */
 .header-search .search-bar {
   display: flex;
-  width: 170%;
-  max-width: 750px;       /* puedes aumentar si quieres más ancho */
+  width: 100%;
+  max-width: 620px;
 }
 
 .header-search .search-input {
   flex: 1;
-  padding: 12px;         /* ↑ */
-  border: 1px solid #ddd;
+  padding: 12px 16px;
+  border: none;
   border-radius: 6px 0 0 6px;
   background: #fff;
-  font-size: 15.5px;     /* ↑ */
+  font-size: 15px;
+  color: #222;
 }
 
 .header-search .search-input::placeholder {
-  font-size: 17.5px;     /* ↑ “¿Qué buscas hoy?” */
+  color: #666;
+  font-size: 15px;
 }
 
 .header-search .search-button {
-  border: 1px solid #ff6a00;
-  border-left: none;
+  background-color: #ff6600;
+  border: none;
   border-radius: 0 6px 6px 0;
-  background: #ece8e4;
   color: #fff;
-  padding: 0 16px;
-  font-size: 18px;
+  padding: 0 22px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background-color: #e65b00;
+  }
 }
 
-/* Acciones (Mi cuenta + Mi carrito) con tipografía más grande */
+/* ===== ACCIONES (Cuenta + Carrito) ===== */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 34px;
+  gap: 36px;
 }
 
-/* Para accesibilidad, el botón de Mi cuenta debe verse como enlace/ícono */
 .account-link {
-  background: transparent;
-  border: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  font-size: 15.5px;   /* ↑ */
+  gap: 4px;
+  background: none;
+  border: none;
   color: #fff;
-  text-decoration: none;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
 
   i {
-    font-size: 25px;  /* icono un poco mayor */
+    font-size: 24px;
+  }
+
+  &:hover {
+    opacity: 0.85;
   }
 }
 
@@ -151,46 +156,55 @@
   display: flex;
   align-items: center;
   color: #fff;
-
-  /* Si tu CartWidget trae el texto, puedes ajustar allí. Si no, agrega algo como:
-  span {
-    font-size: 15.5px;  // ↑
-  } */
+  cursor: pointer;
 }
 
-/* 🔸 Categorías (sin cambios) */
+/* ===== CATEGORÍAS (Barra blanca inferior) ===== */
 .header-categories {
   background: #fff;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
   padding: 10px 0;
 }
 
 .header-categories-container {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
   max-width: 1500px;
   margin: 0 auto;
   flex-wrap: wrap;
 
   a {
+    color: #004899;
     font-size: 14px;
     text-decoration: none;
-    color: #004797;
     position: relative;
-    padding: 0 8px;
-    white-space: nowrap;
+    padding: 0 6px;
   }
 
   a:not(:last-child)::after {
     content: "|";
+    color: #bdbdbd;
     position: absolute;
-    right: -8px;
-    color: #999;
+    right: -7px;
   }
 
   a:hover {
     text-decoration: underline;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .header-main {
+    height: auto;
+    padding: 10px 0;
+  }
+  .header-info-links {
+    display: none;
+  }
+  .header-right-group {
+    gap: 40px;
   }
 }

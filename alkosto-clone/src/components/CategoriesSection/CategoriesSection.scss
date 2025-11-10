@@ -1,76 +1,58 @@
 .categories-section {
-  background: #ff6600;   /* 🔹 Fondo naranja */
-  width: 100vw;          /* 🔹 Ocupar todo el ancho de la pantalla */
-  padding: 60px 0;
-  text-align: center;
-  color: #fff;
+  background: #fff;
+  padding: 40px 0;
+  border-top: 1px solid #eaeaea;
 
-  .categories-header {
-    margin-bottom: 40px;
-
-    h2 {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #fff;
-    }
+  .categories-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    text-align: center;
   }
 
-  /* 🔹 Contenedor interno */
-  .categories-container {
-    max-width: 2000px;
-    margin: 0 auto;
-    padding: 0 20px;
+  .categories-header {
+    margin-bottom: 25px;
+
+    h2 {
+      color: #004899;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+    }
   }
 
   .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     gap: 20px;
+    justify-items: center;
   }
 
   .category-card {
-    background: #fff;
-    border-radius: 8px;
-    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    transition: transform 0.3s ease;
-    cursor: pointer;
+    background: #fff;
+    padding: 10px 6px;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    }
 
     img {
-      width: 70px;
-      height: 70px;
+      width: 55px;
+      height: 55px;
       object-fit: contain;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     span {
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 13px;
       color: #333;
-    }
-
-    &:hover {
-      transform: translateY(-5px);
-    }
-  }
-}
-
-/* 📱 Responsive */
-@media (max-width: 768px) {
-  .categories-section {
-    padding: 30px 10px;
-
-    .categories-header h2 {
-      font-size: 1.5rem;
-    }
-
-    .categories-container {
-      padding: 0 15px;
-    }
-
-    .categories-grid {
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
+      font-weight: 500;
     }
   }
 }
