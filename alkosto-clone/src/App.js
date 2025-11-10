@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation
+} from "react-router-dom";
 
+// ⬇️ Usa la exportación por defecto de tu CartContext
 import { CartProvider } from "./context/CartContext";
+
 import Header from "./components/Header/Header";
-// ⬇️ Usa el footer negro (y elimina el import del Footer blanco)
 import FooterDark from "./components/FooterDark/FooterDark";
 
 import HomePage from "./pages/HomePage";
@@ -12,8 +18,6 @@ import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderConfirmation from "./pages/OrderConfirmation";
-
-// Registro
 import RegisterPage from "./pages/RegisterPage";
 
 import "./App.scss";
@@ -27,38 +31,47 @@ function ScrollToTop() {
   return null;
 }
 
-function App() {
+function AppShell() {
+  const location = useLocation();
+
+  // Rutas donde NO queremos mostrar el footer
+  const HIDE_FOOTER_ON = ["/cart", "/checkout", "/order-confirmation"];
+
+  // Si la ruta actual empieza por alguna de las anteriores, ocultamos el footer
+  const hideFooter = HIDE_FOOTER_ON.some((path) =>
+    location.pathname.startsWith(path)
+  );
+
+  return (
+    <div className="App">
+      <ScrollToTop />
+      <Header />
+
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/category/:categoryId" element={<CategoryPage />} />
+          <Route path="/product/:productId" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />
+          <Route path="/register" element={<RegisterPage />} />
+          {/* <Route path="*" element={<NotFoundPage />} /> */}
+        </Routes>
+      </main>
+
+      {/* ⬇️ Footer visible solo si la ruta NO está marcada para ocultarse */}
+      {!hideFooter && <FooterDark />}
+    </div>
+  );
+}
+
+export default function App() {
   return (
     <CartProvider>
       <Router>
-        <ScrollToTop />
-        <div className="App">
-          <Header />
-
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/category/:categoryId" element={<CategoryPage />} />
-              <Route path="/product/:productId" element={<ProductPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/order-confirmation" element={<OrderConfirmation />} />
-
-              {/* Registro */}
-              <Route path="/register" element={<RegisterPage />} />
-
-              {/* (Opcional) Ruta 404
-              <Route path="*" element={<NotFoundPage />} />
-              */}
-            </Routes>
-          </main>
-
-          {/* ⬇️ Deja solo el footer negro */}
-          <FooterDark />
-        </div>
+        <AppShell />
       </Router>
     </CartProvider>
   );
 }
-
-export default App;

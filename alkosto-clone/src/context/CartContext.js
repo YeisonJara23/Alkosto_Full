@@ -1,60 +1,94 @@
-// src/context/CartContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 
-// Crear el contexto
-export const CartContext = createContext();
+// ---------- helpers ----------
+const CURRENCY = new Intl.NumberFormat("es-CO", {
+  style: "currency",
+  currency: "COP",
+  maximumFractionDigits: 0,
+});
 
-// Proveedor del carrito
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+export const money = (n = 0) => CURRENCY.format(Number(n) || 0);
 
-  // Cantidad total de productos
-  const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+// ---------- context ----------
+const CartContext = createContext(null);
 
-  // Precio total del carrito
-  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+export function CartProvider({ children }) {
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const raw = localStorage.getItem("cart");
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
+  });
 
-  // Agregar al carrito
-  const addToCart = (product, quantity = 1) => {
-    setCartItems((prevItems) => {
-      const existing = prevItems.find((item) => item.id === product.id);
-      if (existing) {
-        return prevItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
-      } else {
-        return [...prevItems, { ...product, quantity }];
+  // persist
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  // add or increase
+  const addToCart = (product, qty = 1) => {
+    if (!product || !product.id) return;
+
+    setCartItems((prev) => {
+      const idx = prev.findIndex((it) => it.id === product.id);
+      if (idx >= 0) {
+        const copy = [...prev];
+        copy[idx] = { ...copy[idx], quantity: copy[idx].quantity + qty };
+        return copy;
       }
+      return [
+        ...prev,
+        {
+          id: product.id,
+          name: product.name || product.title || "Producto",
+          brand: product.brand || "",
+          image:
+            product.image ||
+            product.img ||
+            "/images/products/placeholder.webp",
+          price: Number(product.price) || 0,
+          quantity: qty,
+        },
+      ];
     });
   };
 
-  // Eliminar un producto
-  const removeFromCart = (productId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+  const updateQuantity = (id, qty) => {
+    setCartItems((prev) =>
+      prev.map((it) => (it.id === id ? { ...it, quantity: Number(qty) } : it))
+    );
   };
 
-  // Vaciar carrito
-  const clearCart = () => {
-    setCartItems([]);
+  const removeFromCart = (id) => {
+    setCartItems((prev) => prev.filter((it) => it.id !== id));
   };
 
-  return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        addToCart,
-        removeFromCart,
-        clearCart,
-        totalQuantity,
-        totalPrice,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
-};
+  const clearCart = () => setCartItems([]);
 
-// ✅ Hook personalizado para usar en cualquier parte
+  const totals = useMemo(() => {
+    const subtotal = cartItems.reduce(
+      (acc, it) => acc + Number(it.price) * Number(it.quantity),
+      0
+    );
+    const totalQuantity = cartItems.reduce((acc, it) => acc + it.quantity, 0);
+    const shipping = 0; // "Gratis" para este clon
+    const total = subtotal + shipping;
+    return { subtotal, total, shipping, totalQuantity };
+  }, [cartItems]);
+
+  const value = {
+    cartItems,
+    addToCart,
+    updateQuantity,
+    removeFromCart,
+    clearCart,
+    ...totals,
+    money, // helper de formato
+  };
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+}
+
 export const useCart = () => useContext(CartContext);

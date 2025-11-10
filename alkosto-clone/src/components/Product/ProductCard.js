@@ -1,42 +1,48 @@
-import React from 'react';
-import './ProductCard.scss';
+import React from "react";
+import "./ProductCard.scss";
+import { useCart } from "../../context/CartContext";
 
-const ProductCard = ({ product }) => {
-  const hasDiscount = product.originalPrice > product.price;
-  const discountPercentage = hasDiscount 
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
-    : 0;
+const FALLBACK_IMG = "/images/products/placeholder.webp";
+
+export default function ProductCard({ product }) {
+  const { addToCart, money } = useCart();
+
+  const handleAdd = () => {
+    addToCart(
+      {
+        id: product.id,
+        name: product.name,
+        brand: product.brand,
+        price: product.price,
+        // ✅ guarda SIEMPRE una imagen válida en el carrito
+        image: product.image || FALLBACK_IMG,
+      },
+      1
+    );
+  };
 
   return (
-    <div className="product-card">
-      <div className="product-image">
-        <img src={product.image} alt={product.name} />
-        {hasDiscount && (
-          <span className="discount-badge">-{discountPercentage}%</span>
-        )}
+    <article className="p-card">
+      <img
+        className="p-card__img"
+        src={product.image || FALLBACK_IMG}
+        alt={product.name}
+        loading="lazy"
+        // ✅ si falla el src, usa el fallback
+        onError={(e) => {
+          if (e.currentTarget.src !== window.location.origin + FALLBACK_IMG) {
+            e.currentTarget.src = FALLBACK_IMG;
+          }
+        }}
+      />
+      <div className="p-card__body">
+        <h4 className="p-card__title">{product.name}</h4>
+        {product.brand && <div className="p-card__brand">{product.brand}</div>}
+        <div className="p-card__price">{money(product.price)}</div>
+        <button className="p-card__btn" onClick={handleAdd}>
+          Agregar al carrito
+        </button>
       </div>
-      
-      <div className="product-info">
-        <h3 className="product-name">{product.name}</h3>
-        <p className="product-brand">{product.brand}</p>
-        
-        <div className="product-price">
-          {hasDiscount && (
-            <span className="original-price">${product.originalPrice.toLocaleString()}</span>
-          )}
-          <span className="current-price">${product.price.toLocaleString()}</span>
-        </div>
-        
-        <div className="product-features">
-          {product.features.slice(0, 2).map((feature, index) => (
-            <span key={index} className="feature-tag">{feature}</span>
-          ))}
-        </div>
-        
-        <button className="add-to-cart-btn">Agregar al carrito</button>
-      </div>
-    </div>
+    </article>
   );
-};
-
-export default ProductCard;
+}
