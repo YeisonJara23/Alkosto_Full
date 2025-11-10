@@ -1,0 +1,74 @@
+/* src/components/PaymentOffers/PaymentOffers.scss */
+.payment-offers {
+  position: relative;   /* evita que el footer la tape */
+  z-index: 1;
+  background: #fff;
+  border-top: 1px solid #eee;
+  padding: 20px 0 10px;
+
+  &__container {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  &__title {
+    font-weight: 700;
+    color: #1f1f1f;
+    font-size: 18px;
+    margin: 0 0 14px;
+  }
+
+  &__logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+    gap: 18px 10px;
+    align-items: center;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+
+    img {
+      width: auto;
+      height: 22px;
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+  }
+
+  &__bullets {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 560px) {
+      grid-template-columns: 1fr;
+    }
+
+    .bullet {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: #333;
+
+      .bullet__icon {
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        border-radius: 50%;
+        border: 2px solid #2a6fdb;
+        color: #2a6fdb;
+        font-weight: 700;
+        flex: 0 0 20px;
+        margin-top: 2px;
+      }
+    }
+  }
+}

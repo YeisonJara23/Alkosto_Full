@@ -1,127 +1,105 @@
-import React from 'react';
-import './Footer.scss';
+import React from "react";
+import "./Footer.scss";
 
-const Footer = () => {
+export default function Footer() {
   return (
     <footer className="footer">
-      {/* Main Footer */}
-      <div className="footer-main">
-        <div className="container">
-          <div className="footer-content">
-            {/* Company Info */}
-            <div className="footer-section">
-              <h3>Alkosto</h3>
-              <div className="footer-links">
-                <a href="/nosotros">Nosotros</a>
-                <a href="/tiendas">Nuestras Tiendas</a>
-                <a href="/trabaja-con-nosotros">Trabaja con Nosotros</a>
-                <a href="/contacto">Contáctenos</a>
-              </div>
-            </div>
+      {/* zona superior con 4 columnas */}
+      <div className="footer__top">
+        <div className="container footer__grid">
+          {/* Alkosto */}
+          <div className="footer__block">
+            <h4 className="footer__title">Alkosto</h4>
+            <ul className="footer__list">
+              <li><a href="/nosotros">Nosotros</a></li>
+              <li><a href="/tiendas">Nuestras Tiendas</a></li>
+              <li><a href="/trabaja-con-nosotros">Trabaja con Nosotros</a></li>
+              <li><a href="/contactenos">Contáctenos</a></li>
+            </ul>
 
-            {/* Services */}
-            <div className="footer-section">
-              <h3>Servicio al Cliente</h3>
-              <div className="footer-links">
-                <a href="/garantias">Garantías</a>
-                <a href="/devoluciones">Devoluciones</a>
-                <a href="/preguntas-frecuentes">Preguntas Frecuentes</a>
-                <a href="/terminos-condiciones">Términos y Condiciones</a>
-              </div>
+            <div className="footer__social">
+              <a aria-label="Facebook" href="https://www.facebook.com" target="_blank" rel="noreferrer">
+                <img src="/assets/icons/social/facebook.svg" alt="" />
+              </a>
+              <a aria-label="Instagram" href="https://www.instagram.com" target="_blank" rel="noreferrer">
+                <img src="/assets/icons/social/instagram.svg" alt="" />
+              </a>
+              <a aria-label="YouTube" href="https://www.youtube.com" target="_blank" rel="noreferrer">
+                <img src="/assets/icons/social/youtube.svg" alt="" />
+              </a>
+              <a aria-label="TikTok" href="https://www.tiktok.com" target="_blank" rel="noreferrer">
+                <img src="/assets/icons/social/tiktok.svg" alt="" />
+              </a>
             </div>
+          </div>
 
-            {/* Payment Methods */}
-            <div className="footer-section">
-              <h3>Medios de Pago</h3>
-              <div className="payment-methods">
-                <div className="payment-icon">💳</div>
-                <div className="payment-icon">🏦</div>
-                <div className="payment-icon">📱</div>
-                <div className="payment-icon">💰</div>
-              </div>
-              <div className="footer-links">
-                <a href="/medios-pago">Ver todos los medios de pago</a>
-              </div>
-            </div>
+          {/* Servicio al Cliente */}
+          <div className="footer__block">
+            <h4 className="footer__title">Servicio al Cliente</h4>
+            <ul className="footer__list">
+              <li><a href="/garantias">Garantías</a></li>
+              <li><a href="/devoluciones">Devoluciones</a></li>
+              <li><a href="/preguntas-frecuentes">Preguntas Frecuentes</a></li>
+              <li><a href="/terminos-y-condiciones">Términos y Condiciones</a></li>
+            </ul>
+          </div>
 
-            {/* Contact */}
-            <div className="footer-section">
-              <h3>Contáctanos</h3>
-              <div className="contact-info">
-                <div className="contact-item">
-                  <span className="contact-icon">📞</span>
-                  <span>Venta: (601) 746 8001</span>
-                </div>
-                <div className="contact-item">
-                  <span className="contact-icon">🛠️</span>
-                  <span>Servicio: (601) 407 3033</span>
-                </div>
-                <div className="contact-item">
-                  <span className="contact-icon">✉️</span>
-                  <span>servicio@alkosto.com</span>
-                </div>
-              </div>
+          {/* Medios de Pago */}
+          <div className="footer__block">
+            <h4 className="footer__title">Medios de Pago</h4>
+            <div className="footer__payments">
+              <img src="/assets/icons/payments/mastercard.svg" alt="Mastercard" />
+              <img src="/assets/icons/payments/visa.svg" alt="VISA" />
+              <img src="/assets/icons/payments/diners.svg" alt="Diners Club" />
+              <img src="/assets/icons/payments/amex.svg" alt="American Express" />
+              <img src="/assets/icons/payments/pse.svg" alt="PSE" />
+              <img src="/assets/icons/payments/nequi.svg" alt="Nequi" />
+              <img src="/assets/icons/payments/daviplata.svg" alt="Daviplata" />
+              <img src="/assets/icons/payments/addi.svg" alt="Addi" />
+              <img src="/assets/icons/payments/bancolombia.svg" alt="Bancolombia" />
+              <img src="/assets/icons/payments/efecty.svg" alt="Efecty" />
+              <img src="/assets/icons/payments/surered.svg" alt="Su Red" />
+              <img src="/assets/icons/payments/brilla.svg" alt="Brilla" />
             </div>
+            <a className="footer__link" href="/medios-de-pago">
+              Ver todos los medios de pago
+            </a>
+          </div>
 
-            {/* Social Media */}
-            <div className="footer-section">
-              <h3>Síguenos</h3>
-              <div className="social-media">
-                <a 
-  href="https://www.facebook.com/alkostohiperahorro/" 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  className="social-icon"
->
-  📘
-</a>
-<a 
-  href="https://www.instagram.com/alkostooficial/" 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  className="social-icon"
->
-  📸
-</a>
-<a 
-  href="https://x.com/alkosto" 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  className="social-icon"
->
-  🐦
-</a>
-<a 
-  href="https://www.youtube.com/results?search_query=alkosto" 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  className="social-icon"
->
-  ▶️
-</a>
-              </div>
-            </div>
+          {/* Contáctanos */}
+          <div className="footer__block">
+            <h4 className="footer__title">Contáctanos</h4>
+            <ul className="footer__contact">
+              <li>
+                <span className="i i-phone" aria-hidden="true" />
+                <span>Venta: (601) 746 8001</span>
+              </li>
+              <li>
+                <span className="i i-phone" aria-hidden="true" />
+                <span>Servicio: (601) 407 3033</span>
+              </li>
+              <li>
+                <span className="i i-mail" aria-hidden="true" />
+                <a href="mailto:servicio@alkosto.com">servicio@alkosto.com</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
 
-      {/* Bottom Footer */}
-      <div className="footer-bottom">
-        <div className="container">
-          <div className="footer-bottom-content">
-            <div className="copyright">
-              © 2024 Alkosto. Todos los derechos reservados.
-            </div>
-            <div className="security-badges">
-              <span className="security-badge">🔒</span>
-              <span className="security-badge">🛡️</span>
-              <span className="security-badge">⭐</span>
-            </div>
+      {/* franja inferior con copyright */}
+      <div className="footer__bottom">
+        <div className="container footer__bottom-inner">
+          <p>© 2024 Alkosto. Todos los derechos reservados.</p>
+
+          <div className="footer__badges">
+            {/* opcionales: pequeños íconos de seguridad/sello */}
+            <img src="/assets/icons/badges/lock.svg" alt="Sitio seguro" />
+            <img src="/assets/icons/badges/shield.svg" alt="Protección de datos" />
+            <img src="/assets/icons/badges/star.svg" alt="Calidad" />
           </div>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

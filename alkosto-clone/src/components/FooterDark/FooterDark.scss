@@ -1,0 +1,101 @@
+.footer-dark {
+  --bg: #0f0f10;         /* negro */
+  --text: #f0f3f8;       /* blanco suave */
+  --muted: #bdc6d3;      /* gris claro */
+  --line: #2a2e35;       /* separadores */
+  --link: #e7ebf3;       /* links blancos */
+  --link-hover: #5aa3ff; /* acento al pasar */
+
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14.5px;
+
+  .container {
+    width: min(1240px, 100%);
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+
+  /* ===== head (3 columnas) ===== */
+  &__head {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px;
+    padding: 32px 0;
+
+    h5 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    a:hover { color: var(--link-hover); }
+  }
+
+  &__divider {
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* ===== enlaces (5 columnas) ===== */
+  &__links {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+    padding: 28px 0 36px;
+  }
+
+  &__block {
+    h4 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: .2px;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li { margin: 8px 0; }
+      a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+      a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  /* ===== copy ===== */
+  &__copy {
+    border-top: 1px solid var(--line);
+    padding: 16px 0 22px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* ===== responsive ===== */
+  @media (max-width: 1120px) {
+    &__links { grid-template-columns: repeat(3, 1fr); }
+    &__head  { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 720px) {
+    &__links { grid-template-columns: 1fr 1fr; }
+    &__head  { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    &__links { grid-template-columns: 1fr; }
+  }
+}
